@@ -19,12 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware([HelloMiddleware::class])->group(function() {
-    Route::get('/hello', 'App\Http\Controllers\HelloController@index');
-    Route::get('/hello/other', 'App\Http\Controllers\HelloController@other');
-});
+// Route::middleware([HelloMiddleware::class])->group(function() {
+//     Route::get('/hello', 'App\Http\Controllers\HelloController@index');
+//     Route::get('/hello/other', 'App\Http\Controllers\HelloController@other');
+// });
 
 Route::namespace('App\Http\Controllers\Sample')->group(function() {
     Route::get('/sample', 'SampleController@index');
     Route::get('/sample/other', 'SampleController@other');
 });
+
+Route::get('/hello', 'App\Http\Controllers\HelloController@index');
