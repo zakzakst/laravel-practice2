@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\HelloMiddleware;
-// use App\Http\Controllers\Sample;
+use App\Http\Controllers\Sample;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +24,11 @@ Route::get('/', function () {
 //     Route::get('/hello/other', 'App\Http\Controllers\HelloController@other');
 // });
 
-Route::namespace('App\Http\Controllers\Sample')->group(function() {
-    Route::get('/sample', 'SampleController@index');
-    Route::get('/sample/other', 'SampleController@other');
-});
+// Route::namespace('App\Http\Controllers\Sample')->group(function() {
+//     Route::get('/sample', 'SampleController@index');
+//     Route::get('/sample/other', 'SampleController@other');
+// });
 
 Route::get('/hello', 'App\Http\Controllers\HelloController@index');
+Route::get('/hello/other', 'App\Http\Controllers\HelloController@other');
+Route::get('/sample', 'App\Http\Controllers\Sample\SampleController@index')->name('sample');

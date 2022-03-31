@@ -11,7 +11,7 @@ class HelloController extends Controller
             'sample.message' => '新しいメッセージ！',
         ]);
     }
-    
+
     public function index(Request $request) {
         $sample_msg = config('sample.message');
         $sample_data = config('sample.data');
@@ -23,9 +23,6 @@ class HelloController extends Controller
     }
 
     public function other(Request $request) {
-        $data = [
-            'msg' => $request->bye,
-        ];
-        return view('hello.index', $data);
+        return redirect()->route('sample');
     }
 }
