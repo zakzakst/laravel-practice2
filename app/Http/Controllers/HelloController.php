@@ -3,28 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class HelloController extends Controller
 {
-    function __construct() {
-        config([
-            'sample.message' => '新しいメッセージ！',
-        ]);
+    private $fname;
+
+    public function __construct() {
+        $this->fname = 'sample.txt';
     }
 
     public function index(Request $request) {
-        $sample_msg = env('SAMPLE_MESSAGE');
-        $sample_data = array_map('trim', explode(',', env('SAMPLE_DATA')));
-        // $sample_data = env('SAMPLE_DATA');
-        // $sample_data = config('sample.data');
+        $sample_msg = $this->fname;
+        $sample_data = Storage::get($this->fname);
         $data = [
             'msg' => $sample_msg,
-            'data' => $sample_data,
+            'data' => explode(PHP_EOL, $sample_data),
         ];
         return view('hello.index', $data);
     }
 
-    public function other(Request $request) {
-        return redirect()->route('sample');
+    public function other($msg) {
+        Storage::append($this->fname, $msg);
+        return redirect()->route('hello');
     }
 }
