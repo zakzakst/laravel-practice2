@@ -10,12 +10,12 @@ class HelloController extends Controller
     private $fname;
 
     public function __construct() {
-        $this->fname = 'sample.txt';
+        $this->fname = 'hello.txt';
     }
 
     public function index(Request $request) {
-        $sample_msg = $this->fname;
-        $sample_data = Storage::get($this->fname);
+        $sample_msg = Storage::disk('public')->url($this->fname);
+        $sample_data = Storage::disk('public')->get($this->fname);
         $data = [
             'msg' => $sample_msg,
             'data' => explode(PHP_EOL, $sample_data),
@@ -24,7 +24,7 @@ class HelloController extends Controller
     }
 
     public function other($msg) {
-        Storage::append($this->fname, $msg);
+        Storage::disk('public')->prepend($this->fname, $msg);
         return redirect()->route('hello');
     }
 }
