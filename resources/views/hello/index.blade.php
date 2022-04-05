@@ -6,6 +6,7 @@
 <body>
   <h1>Hello/Index</h1>
   <p>{!! $msg !!}</p>
+  <p><a href="/hello/other">download</a></p>
   <ul>
     @foreach ($data as $item)
       <li>{{ $item }}</li>
