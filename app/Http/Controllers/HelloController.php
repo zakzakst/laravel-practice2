@@ -31,8 +31,13 @@ class HelloController extends Controller
     }
 
     public function other(Request $request) {
-        $ext = '.' . $request->file('file')->extension();
-        Storage::disk('local')->putFileAs('files', $request->file('file'), 'uploaded' . $ext);
-        return redirect()->route('hello');
+        $data = [
+            'name' => 'Taro',
+            'mail' => 'taro@yamada',
+            'tel' => '00-0000-0000',
+        ];
+        $query_str = http_build_query($data);
+        $data['msg'] = $query_str;
+        return redirect()->route('hello', $data);
     }
 }
