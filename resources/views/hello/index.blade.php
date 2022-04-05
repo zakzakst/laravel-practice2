@@ -9,13 +9,13 @@
   <form action="/hello" method="post">
     @csrf
     <div>
-      NAME:<input type="text" name="name">
+      NAME:<input type="text" name="name" value="{{ old('name') }}">
     </div>
     <div>
-      MAIL:<input type="text" name="mail">
+      MAIL:<input type="text" name="mail" value="{{ old('mail') }}">
     </div>
     <div>
-      TEL:<input type="text" name="tel">
+      TEL:<input type="text" name="tel" value="{{ old('tel') }}">
     </div>
     <input type="submit">
   </form>
