@@ -13,18 +13,36 @@ class HelloController extends Controller
         $this->fname = 'hello.txt';
     }
 
-    public function index(Request $request) {
-        $sample_msg = Storage::disk('public')->url($this->fname);
+    public function index() {
+        $url = Storage::disk('public')->url($this->fname);
+        $size = Storage::disk('public')->size($this->fname);
+        $modified = Storage::disk('public')->lastModified($this->fname);
+        
+        $modified_time = date('y-m-d H:i:s', $modified);
+        $sample_keys = ['url', 'size', 'modified'];
+        $sample_meta = [$url, $size, $modified_time];
+
+        $result = '<table><tr><th>' . implode('</th><th>', $sample_keys) . '</th></tr>';
+        $result .= '<tr><td>' . implode('</td><td>', $sample_meta) . '</td></tr></table>';
+
         $sample_data = Storage::disk('public')->get($this->fname);
+
         $data = [
-            'msg' => $sample_msg,
+            'msg' => $result,
             'data' => explode(PHP_EOL, $sample_data),
         ];
         return view('hello.index', $data);
     }
 
     public function other($msg) {
-        Storage::disk('public')->prepend($this->fname, $msg);
+        if (Storage::disk('public')->exists('bk_' . $this->fname)) {
+            Storage::disk('public')->delete('bk_' . $this->fname);
+        }
+        Storage::disk('public')->copy($this->fname, 'bk_' . $this->fname);
+        if (Storage::disk('local')->exists('bk_' . $this->fname)) {
+            Storage::disk('local')->delete('bk_' . $this->fname);
+        }
+        Storage::disk('local')->move('public/bk_' . $this->fname, 'bk_' . $this->fname);
         return redirect()->route('hello');
     }
 }
