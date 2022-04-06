@@ -1,12 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-// use App\MyClasses\MyService;
+use App\MyClasses\MyService;
+use App\MyClasses\MyServiceInterface;
 
 class HelloController extends Controller
 {
-    public function index(int $id = -1) {
-        $myservice = app()->makeWith('App\MyClasses\MyService', ['id' => $id]);
+    function __construct() {
+    }
+
+    public function index(MyServiceInterface $myservice, int $id = -1) {
+        $myservice->setId($id);
         $data = [
             'msg' => $myservice->say(),
             'data' => $myservice->alldata(),
