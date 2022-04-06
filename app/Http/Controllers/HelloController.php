@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 use App\MyClasses\MyService;
+use App\MyClasses\MyServiceInterface;
 
 class HelloController extends Controller
 {
-    function __construct(MyService $myservice) {
-        $myservice = app('App\MyClasses\MyService');
+    function __construct() {
     }
 
-    public function index(MyService $myservice, int $id = -1) {
+    public function index(MyServiceInterface $myservice, int $id = -1) {
         $myservice->setId($id);
         $data = [
             'msg' => $myservice->say(),
