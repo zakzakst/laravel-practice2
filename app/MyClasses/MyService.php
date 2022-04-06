@@ -7,7 +7,11 @@ class MyService
   private $msg = 'no id...';
   private $data = ['Hello', 'Welcome', 'Bye'];
 
-  public function __construct() {
+  private function __construct() {
+  }
+
+  public function getInstance() {
+    return self::$myservice ?? self::$myservice = new MyService();
   }
 
   public function setId($id) {
