@@ -19,4 +19,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello', 'App\Http\Controllers\HelloController@index')->name('hello');
+Route::get('/hello/{id}', 'App\Http\Controllers\HelloController@index');
