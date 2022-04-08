@@ -19,4 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello/{id}', 'App\Http\Controllers\HelloController@index');
+Route::get('/hello', 'App\Http\Controllers\HelloController@index')
+    ->middleware(App\Http\Middleware\MyMiddleware::class);
+Route::get('/hello/{id}', 'App\Http\Controllers\HelloController@index')
+    ->middleware(App\Http\Middleware\MyMiddleware::class);
