@@ -6,17 +6,11 @@ use Illuminate\Support\Facades\DB;
 class HelloController extends Controller
 {
     public function index($id = -1) {
-        $data = ['msg' => '', 'data' => []];
-        $msg = 'get: ';
-        $result = [];
-        DB::table('people')->chunkById(2, function($items) use (&$msg, &$result) {
-            foreach($items as $item) {
-                $msg .= $item->id . ' ';
-                $result += array_merge($result, [$item]);
-                break;
-            }
-            return true;
-        });
+        $ids = explode(',', $id);
+        $msg = 'get people.';
+        $result = DB::table('people')
+            ->whereIn('id', $ids)
+            ->get();
         
         $data = [
             'msg' => $msg,
