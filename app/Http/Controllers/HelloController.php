@@ -8,9 +8,9 @@ class HelloController extends Controller
     public function index($id = -1) {
         if ($id >= 0)
         {
-            $msg = 'get ID <= ' . $id;
+            $msg = 'get name like"' . $id . '".';
             $result = DB::table('people')
-                ->where('id', '<=', $id)
+                ->where('name', 'like', '%' . $id . '%')
                 ->get();
         }
         else
