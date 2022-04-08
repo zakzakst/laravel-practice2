@@ -9,15 +9,18 @@ class HelloController extends Controller
         $data = ['msg' => '', 'data' => []];
         $msg = 'get: ';
         $result = [];
+        $count = 0;
         DB::table('people')
-            ->orderBy('name', 'asc')
-            ->chunkById(2, function($items) use (&$msg, &$result)
+            ->chunkById(3, function($items) use (&$msg, &$result, &$id, &$count)
         {
-            foreach($items as $item) {
-                $msg .= $item->id . ' ';
-                $result += array_merge($result, [$item]);
-                break;
+            if ($count == $id) {
+                foreach($items as $item) {
+                    $msg .= $item->id . ' ';
+                    $result += array_merge($result, [$item]);
+                }
+                return false;
             }
+            $count++;
             return true;
         });
         
