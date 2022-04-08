@@ -5,11 +5,10 @@ use App\Facades\MyService;
 
 class HelloController extends Controller
 {
-    public function index(int $id = -1) {
-        MyService::setId($id);
+    public function index(Request $request) {
         $data = [
-            'msg' => MyService::say(),
-            'data' => MyService::alldata(),
+            'msg' => $request->hello,
+            'data' => $request->alldata,
         ];
         return view('hello.index', $data);
     }
