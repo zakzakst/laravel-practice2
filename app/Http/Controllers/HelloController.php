@@ -7,15 +7,11 @@ use App\Http\Pagination\MyPaginator;
 class HelloController extends Controller
 {
     public function index(Request $request) {
-        $id = $request->query('page');
-        $msg = 'show page: ' . $id;
-        $result = Person::paginate(3);
-        $paginator = new MyPaginator($result);
-        
+        $msg = 'show people record.';
+        $result = Person::get();
         $data = [
             'msg' => $msg,
             'data' => $result,
-            'paginator' => $paginator,
         ];
         return view('hello.index', $data);
     }
