@@ -23,3 +23,6 @@ Route::get('/hello', 'App\Http\Controllers\HelloController@index')
     ->middleware('MyMW');
 Route::get('/hello/{id}', 'App\Http\Controllers\HelloController@index')
     ->middleware('MyMW');
+Route::get('/hello/{id}/{name}', 'App\Http\Controllers\HelloController@save');
+Route::get('/hello/json', 'App\Http\Controllers\HelloController@json');
+Route::get('/hello/json/{id}', 'App\Http\Controllers\HelloController@json');
