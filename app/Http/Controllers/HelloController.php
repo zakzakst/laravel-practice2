@@ -24,4 +24,12 @@ class HelloController extends Controller
         $record->save();
         return redirect()->route('hello');
     }
+
+    public function other() {
+        $person = new Person();
+        $person->all_data = ['aaa', 'bbb@ccc', 1234];
+        $person->save();
+
+        return redirect()->route('hello');
+    }
 }
