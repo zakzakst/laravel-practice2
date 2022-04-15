@@ -7,6 +7,7 @@ use App\Http\Pagination\MyPaginator;
 class HelloController extends Controller
 {
     public function index(Request $request) {
+        MyJob::dispatch();
         $msg = 'show people record.';
         $re = Person::get();
         $fields = Person::get()->fields();
