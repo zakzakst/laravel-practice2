@@ -6,7 +6,7 @@ use App\Events\PersonEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class PersonEventListener
+class PersonEventListener implements ShouldQueue
 {
     public function __construct()
     {
