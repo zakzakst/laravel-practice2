@@ -91,6 +91,15 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'testing' => [
+            'driver' => '',
+            'database' => '',
+            'host' => '',
+            'port' => '',
+            'username' => '',
+            'password' => '',
+        ],
+
     ],
 
     /*
